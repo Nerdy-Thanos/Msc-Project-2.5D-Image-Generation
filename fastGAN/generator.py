@@ -120,7 +120,7 @@ def UpBlockComp(in_planes, out_planes):
 
 
 class Generator(nn.Module):
-    def __init__(self, ngf=64, nz=100, nc=3, im_size=1024):
+    def __init__(self, ngf, nz, nc, im_size):
         super(Generator, self).__init__()
 
         nfc_multi = {4:16, 8:8, 16:4, 32:2, 64:2, 128:1, 256:0.5, 512:0.25, 1024:0.125}
@@ -129,6 +129,10 @@ class Generator(nn.Module):
             nfc[k] = int(v*ngf)
 
         self.im_size = im_size
+        self.ngf = ngf
+        self.nz = nz
+        self.nc = nc
+        
 
         self.init = InitLayer(nz, channel=nfc[4])
                                 

@@ -104,10 +104,11 @@ class DownBlockComp(nn.Module):
 
 
 class Discriminator(nn.Module):
-    def __init__(self, ndf=64, nc=3, im_size=512):
+    def __init__(self, ndf, nc, im_size=512):
         super(Discriminator, self).__init__()
         self.ndf = ndf
         self.im_size = im_size
+        self.nc = nc
 
         nfc_multi = {4:16, 8:16, 16:8, 32:4, 64:2, 128:1, 256:0.5, 512:0.25, 1024:0.125}
         nfc = {}
