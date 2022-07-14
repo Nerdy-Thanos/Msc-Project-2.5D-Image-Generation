@@ -2,6 +2,7 @@ from __future__ import print_function
 #%matplotlib inline
 import argparse
 import os
+from pathlib import Path
 import random
 import torch
 import torch.nn as nn
@@ -173,6 +174,13 @@ for epoch in range(num_epochs):
 
         iters += 1
 
+#Saving the discriminator model's state
+torch.save(netD.state_dict(), "DCGan/ckpt/trained_disc.pt")
+
+#Saving the generator model's state
+torch.save(netG.state_dict(), "DCGan/ckpt/trained_gen.pt")
+
+
 plt.figure(figsize=(10,5))
 plt.title("Generator and Discriminator Loss During Training")
 plt.plot(G_losses,label="G")
@@ -180,4 +188,21 @@ plt.plot(D_losses,label="D")
 plt.xlabel("iterations")
 plt.ylabel("Loss")
 plt.legend()
+plt.show()
+
+# Grab a batch of real images from the dataloader
+real_batch = next(iter(dataloader))
+
+# Plot the real images
+plt.figure(figsize=(15,15))
+plt.subplot(1,2,1)
+plt.axis("off")
+plt.title("Real Images")
+plt.imshow(np.transpose(vutils.make_grid(real_batch[0].to(device)[:64], padding=5, normalize=True).cpu(),(1,2,0)))
+
+# Plot the fake images from the last epoch
+plt.subplot(1,2,2)
+plt.axis("off")
+plt.title("Fake Images")
+plt.imshow(np.transpose(img_list[-1],(1,2,0)))
 plt.show()
