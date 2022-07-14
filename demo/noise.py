@@ -43,7 +43,7 @@ noise_img = random_noise(img, mode='s&p',amount=0.1)
 # on the range [0, 1], thus we changed it to 'uint8'
 # and from [0,255]
 noise_img = np.array(255*noise_img, dtype = 'uint8')
-blurred = cv2.GaussianBlur(noise_img, (3, 3), 3)
+blurred = cv2.GaussianBlur(noise_img, (5, 5), 3)
 # Display the noise image
-cv2.imshow('blur',blurred)
+cv2.imshow('gan',blurred)
 cv2.waitKey(0)
