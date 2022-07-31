@@ -17,6 +17,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from IPython.display import HTML
+import cv2
 
 from gennet import Generator
 from disnet import Discriminator
@@ -48,7 +49,7 @@ ngf = 64
 # Size of feature maps in discriminator
 ndf = 64
 # Number of training epochs
-num_epochs = 10
+num_epochs = 20
 # Learning rate for optimizers
 lr = 0.0001
 # Beta1 hyperparam for Adam optimizers
@@ -170,10 +171,11 @@ for epoch in range(num_epochs):
         if (iters % 500 == 0) or ((epoch == num_epochs-1) and (i == len(dataloader)-1)):
             with torch.no_grad():
                 fake = netG(fixed_noise).detach().cpu()
-            img_list.append(vutils.make_grid(fake, padding=2, normalize=True))
+            img_list.append(fake)
 
         iters += 1
-
+for i in img_list:
+    cv2.imwrite({format(i)}.jpg)
 #Saving the discriminator model's state
 torch.save(netD.state_dict(), "DCGan/ckpt/trained_disc.pt")
 
