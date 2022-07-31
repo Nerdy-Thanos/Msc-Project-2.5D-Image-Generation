@@ -175,7 +175,7 @@ for epoch in range(num_epochs):
 
         iters += 1
 for i in img_list:
-    cv2.imwrite({format(i)}.jpg)
+    cv2.imwrite("{}.jpg".format(i))
 #Saving the discriminator model's state
 torch.save(netD.state_dict(), "DCGan/ckpt/trained_disc.pt")
 
