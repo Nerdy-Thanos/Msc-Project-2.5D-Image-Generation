@@ -49,9 +49,9 @@ ngf = 64
 # Size of feature maps in discriminator
 ndf = 64
 # Number of training epochs
-num_epochs = 20
+num_epochs = 15
 # Learning rate for optimizers
-lr = 0.0001
+lr = 0.0002
 # Beta1 hyperparam for Adam optimizers
 beta1 = 0.5
 # Number of GPUs available. Use 0 for CPU mode.
@@ -174,13 +174,12 @@ for epoch in range(num_epochs):
             img_list.append(fake)
 
         iters += 1
-for i in img_list:
-    cv2.imwrite("{}.jpg".format(i))
+
 #Saving the discriminator model's state
-torch.save(netD.state_dict(), "DCGan/ckpt/trained_disc.pt")
+torch.save(netD, "DCGan/ckpt/trained_disc.pt")
 
 #Saving the generator model's state
-torch.save(netG.state_dict(), "DCGan/ckpt/trained_gen.pt")
+torch.save(netG, "DCGan/ckpt/trained_gen.pt")
 
 
 plt.figure(figsize=(10,5))
@@ -192,19 +191,3 @@ plt.ylabel("Loss")
 plt.legend()
 plt.show()
 
-# Grab a batch of real images from the dataloader
-real_batch = next(iter(dataloader))
-
-# Plot the real images
-plt.figure(figsize=(15,15))
-plt.subplot(1,2,1)
-plt.axis("off")
-plt.title("Real Images")
-plt.imshow(np.transpose(vutils.make_grid(real_batch[0].to(device)[:64], padding=5, normalize=True).cpu(),(1,2,0)))
-
-# Plot the fake images from the last epoch
-plt.subplot(1,2,2)
-plt.axis("off")
-plt.title("Fake Images")
-plt.imshow(np.transpose(img_list[-1],(1,2,0)))
-plt.show()
