@@ -181,6 +181,11 @@ torch.save(netD, "DCGan/ckpt/trained_disc.pt")
 #Saving the generator model's state
 torch.save(netG, "DCGan/ckpt/trained_gen.pt")
 
+img_no = 0
+save_path = "generated/"
+for i in img_list:
+    cv2.imwrite(i, save_path + str(img_no) + ".jpg")
+    img_no+=1
 
 plt.figure(figsize=(10,5))
 plt.title("Generator and Discriminator Loss During Training")
@@ -191,3 +196,19 @@ plt.ylabel("Loss")
 plt.legend()
 plt.show()
 
+# Grab a batch of real images from the dataloader
+real_batch = next(iter(dataloader))
+
+# Plot the real images
+plt.figure(figsize=(15,15))
+plt.subplot(1,2,1)
+plt.axis("off")
+plt.title("Real Images")
+plt.imshow(np.transpose(vutils.make_grid(real_batch[0].to(device)[:64], padding=5, normalize=True).cpu(),(1,2,0)))
+
+# Plot the fake images from the last epoch
+plt.subplot(1,2,2)
+plt.axis("off")
+plt.title("Fake Images")
+plt.imshow(np.transpose(img_list[-1],(1,2,0)))
+plt.show()
