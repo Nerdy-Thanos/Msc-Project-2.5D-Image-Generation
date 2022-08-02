@@ -33,7 +33,7 @@ def weights_init(m):
         nn.init.constant_(m.bias.data, 0)
 
 # Root directory for dataset
-dataroot = "/Users/vignesh/Documents/GitHub/Msc-Project-2.5D-Image-Generation/holopix50k-master/dataset/Holopix50k/val"
+dataroot = "left"
 # Number of workers for dataloader
 workers = 0
 # Batch size during training
@@ -87,8 +87,8 @@ criterion = nn.BCELoss()
 fixed_noise = torch.randn(64, nz, 1, 1, device=device)
 
 # Establish convention for real and fake labels during training
-real_label = 1.
-fake_label = 0.
+real_label = 1.0
+fake_label = 0.0
 
 # Setup Adam optimizers for both G and D
 optimizerD = optim.Adam(netD.parameters(), lr=lr, betas=(beta1, 0.999))
@@ -211,7 +211,7 @@ plt.imshow(np.transpose(img_list[-1],(1,2,0)))
 plt.show()
 
 img_no = 0
-save_path = "generated/"
+
 for i in img_list:
-    save_image(i,"{}_gen.jpg".format(img_no))
+    save_image(i,"generated/{}_gen.jpg".format(img_no))
     img_no+=1
