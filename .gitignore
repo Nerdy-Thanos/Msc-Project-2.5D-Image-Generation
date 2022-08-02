@@ -7,3 +7,4 @@ gan
 .DS_Store
 holopix50k-master
 *.jpg
+*.pt

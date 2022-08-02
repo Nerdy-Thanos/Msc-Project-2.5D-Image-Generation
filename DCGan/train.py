@@ -17,6 +17,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from IPython.display import HTML
+from torchvision.utils import save_image
 import cv2
 
 from gennet import Generator
@@ -32,7 +33,7 @@ def weights_init(m):
         nn.init.constant_(m.bias.data, 0)
 
 # Root directory for dataset
-dataroot = "/Users/vignesh/Documents/GitHub/Msc-Project-2.5D-Image-Generation/left"
+dataroot = "/Users/vignesh/Documents/GitHub/Msc-Project-2.5D-Image-Generation/holopix50k-master/dataset/Holopix50k/val"
 # Number of workers for dataloader
 workers = 0
 # Batch size during training
@@ -49,9 +50,9 @@ ngf = 64
 # Size of feature maps in discriminator
 ndf = 64
 # Number of training epochs
-num_epochs = 15
+num_epochs = 10
 # Learning rate for optimizers
-lr = 0.0002
+lr = 0.0001
 # Beta1 hyperparam for Adam optimizers
 beta1 = 0.5
 # Number of GPUs available. Use 0 for CPU mode.
@@ -158,7 +159,7 @@ for epoch in range(num_epochs):
         optimizerG.step()
 
         # Output training stats
-        if i % 50 == 0:
+        if i % 500 == 0:
             print('[%d/%d][%d/%d]\tLoss_D: %.4f\tLoss_G: %.4f\tD(x): %.4f\tD(G(z)): %.4f / %.4f'
                   % (epoch, num_epochs, i, len(dataloader),
                      errD.item(), errG.item(), D_x, D_G_z1, D_G_z2))
@@ -181,11 +182,7 @@ torch.save(netD, "DCGan/ckpt/trained_disc.pt")
 #Saving the generator model's state
 torch.save(netG, "DCGan/ckpt/trained_gen.pt")
 
-img_no = 0
-save_path = "generated/"
-for i in img_list:
-    cv2.imwrite(i, save_path + str(img_no) + ".jpg")
-    img_no+=1
+
 
 plt.figure(figsize=(10,5))
 plt.title("Generator and Discriminator Loss During Training")
@@ -195,13 +192,6 @@ plt.xlabel("iterations")
 plt.ylabel("Loss")
 plt.legend()
 plt.show()
-
-fig = plt.figure(figsize=(8,8))
-plt.axis("off")
-ims = [[plt.imshow(np.transpose(i,(1,2,0)), animated=True)] for i in img_list]
-ani = animation.ArtistAnimation(fig, ims, interval=1000, repeat_delay=1000, blit=True)
-
-HTML(ani.to_jshtml())
 
 # Grab a batch of real images from the dataloader
 real_batch = next(iter(dataloader))
@@ -219,3 +209,9 @@ plt.axis("off")
 plt.title("Fake Images")
 plt.imshow(np.transpose(img_list[-1],(1,2,0)))
 plt.show()
+
+img_no = 0
+save_path = "generated/"
+for i in img_list:
+    save_image(i,"{}_gen.jpg".format(img_no))
+    img_no+=1
