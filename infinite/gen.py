@@ -8,8 +8,8 @@ import torch
 import torchvision.transforms.functional as TVF
 import numpy as np
 from distutils.dir_util import copy_tree
-import dnnlib
-from scripts.legacy import load_network_pkl
+#import dnnlib
+#from scripts.legacy import load_network_pkl
 
 np.random.seed(42)
 torch.manual_seed(42)
@@ -18,12 +18,12 @@ torch.set_grad_enabled(False)
 device = torch.device("mps" if (torch.has_mps) else "cpu")
 
 network_pt = 'DCGan/ckpt/trained_gen.pt'
-device = 'cuda'
+device = torch.device('mps')
 
-with dnnlib.util.open_url(network_pt) as f:
-    G = load_network_pkl(f)['G_ema'].to(device) 
-    G.eval()
-    G.progressive_growing_update(100000)
+
+G = torch.load(network_pt).to(device) 
+G.eval()
+G.progressive_growing_update(100000)
 
 for res in G.synthesis.block_resolutions:
     block = getattr(G.synthesis, f'b{res}')

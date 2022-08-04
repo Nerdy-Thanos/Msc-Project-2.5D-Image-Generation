@@ -8,3 +8,10 @@ gan
 holopix50k-master
 *.jpg
 *.pt
+mono_depth_estim
+.jpg
+.png
+.mp4
+*.png
+*.mp4
+demo/noise.py

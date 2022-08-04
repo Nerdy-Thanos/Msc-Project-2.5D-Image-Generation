@@ -40,15 +40,15 @@ workers = 0
 batch_size = 4
 # Spatial size of training images. All images will be resized to this
 #   size using a transformer.
-image_size = 64
+image_size = 512
 # Number of channels in the training images. For color images this is 3
 nc = 3
 # Size of z latent vector (i.e. size of generator input)
 nz = 128
 # Size of feature maps in generator
-ngf = 64
+ngf = 512
 # Size of feature maps in discriminator
-ndf = 64
+ndf = 512
 # Number of training epochs
 num_epochs = 10
 # Learning rate for optimizers
@@ -172,7 +172,7 @@ for epoch in range(num_epochs):
         if (iters % 500 == 0) or ((epoch == num_epochs-1) and (i == len(dataloader)-1)):
             with torch.no_grad():
                 fake = netG(fixed_noise).detach().cpu()
-            img_list.append(vutils.make_grid(fake, padding=2, normalize=True))
+            img_list.append(fake)
 
         iters += 1
 
@@ -193,25 +193,9 @@ plt.ylabel("Loss")
 plt.legend()
 plt.show()
 
-# Grab a batch of real images from the dataloader
-real_batch = next(iter(dataloader))
 
-# Plot the real images
-plt.figure(figsize=(15,15))
-plt.subplot(1,2,1)
-plt.axis("off")
-plt.title("Real Images")
-plt.imshow(np.transpose(vutils.make_grid(real_batch[0].to(device)[:64], padding=5, normalize=True).cpu(),(1,2,0)))
 
-# Plot the fake images from the last epoch
-plt.subplot(1,2,2)
-plt.axis("off")
-plt.title("Fake Images")
-plt.imshow(np.transpose(img_list[-1],(1,2,0)))
-plt.show()
 
-img_no = 0
-
-for i in img_list:
-    save_image(i,"generated/{}_gen.jpg".format(img_no))
-    img_no+=1
+for i,n in enumerate(img_list):
+    save_image(i,"generated/{}_gen.jpg".format(i))
+    
