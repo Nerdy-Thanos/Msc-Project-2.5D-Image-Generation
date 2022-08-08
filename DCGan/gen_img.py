@@ -10,7 +10,7 @@ cpkt = torch.load("DCGan/ckpt/trained_gen.pt")
 cpkt.to(device)
 print(cpkt.eval())
 
-fixed_noise = torch.randn(128, 100, 1, 1, device=device)
+fixed_noise = torch.randn(128, 256, 1, 1, device=device)
 with torch.no_grad():
     fake = cpkt(fixed_noise)
 fake.detach().cpu()

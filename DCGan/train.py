@@ -45,7 +45,7 @@ image_size = 128
 # Number of channels in the training images. For color images this is 3
 nc = 3
 # Size of z latent vector (i.e. size of generator input)
-nz = 100
+nz = 256
 # Size of feature maps in generator
 ngf = 64
 # Size of feature maps in discriminator
@@ -53,7 +53,7 @@ ndf = 16
 # Number of training epochs
 num_epochs = 10
 # Learning rate for optimizers
-lr = 0.0002
+lr = 0.002
 # Beta1 hyperparam for Adam optimizers
 beta1 = 0.5
 # Number of GPUs available. Use 0 for CPU mode.
@@ -208,6 +208,4 @@ plt.show()
 
 
 
-for i,n in enumerate(img_list):
-    save_image(i,"generated/{}_gen.jpg".format(i))
     
