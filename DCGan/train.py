@@ -34,7 +34,7 @@ def weights_init(m):
         nn.init.constant_(m.bias.data, 0)
 
 # Root directory for dataset
-dataroot = "left"
+dataroot = "landscape"
 # Number of workers for dataloader
 workers = 0
 # Batch size during training
