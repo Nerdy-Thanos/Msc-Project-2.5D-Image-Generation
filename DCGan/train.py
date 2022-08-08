@@ -41,15 +41,15 @@ workers = 0
 batch_size = 4
 # Spatial size of training images. All images will be resized to this
 #   size using a transformer.
-image_size = 64
+image_size = 128
 # Number of channels in the training images. For color images this is 3
 nc = 3
 # Size of z latent vector (i.e. size of generator input)
-nz = 64
+nz = 100
 # Size of feature maps in generator
 ngf = 64
 # Size of feature maps in discriminator
-ndf = 64
+ndf = 16
 # Number of training epochs
 num_epochs = 10
 # Learning rate for optimizers
@@ -138,10 +138,10 @@ for epoch in range(num_epochs):
         # Generate batch of latent vectors
         noise = torch.randn(b_size, nz, 1, 1, device=device)
         # Generate fake image batch with G
-        fake1 = netG(noise).detach().cpu()
-        fake2 = netG2(noise).detach().cpu()
+        fake = netG(noise)
+        #fake2 = netG2(noise)
 
-        fake = np.concatenate((fake1,fake2), 2).to(device)
+        #fake = torch.cat([fake1,fake2],1)
         label.fill_(fake_label)
         # Classify all fake batch with D
         output = netD(fake.detach()).view(-1)
