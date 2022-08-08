@@ -20,6 +20,7 @@ from IPython.display import HTML
 from torchvision.utils import save_image
 import cv2
 
+
 from gennet import Generator
 from disnet import Discriminator
 
@@ -40,7 +41,7 @@ workers = 0
 batch_size = 4
 # Spatial size of training images. All images will be resized to this
 #   size using a transformer.
-image_size = 256
+image_size = 64
 # Number of channels in the training images. For color images this is 3
 nc = 3
 # Size of z latent vector (i.e. size of generator input)
@@ -75,6 +76,11 @@ netG = Generator(ngpu, nz=nz, nc=nc, ngf=ngf).to(device)
 netG.apply(weights_init)
 
 print(netG)
+
+netG2 = Generator(ngpu, nz=nz, nc=nc, ngf=ngf).to(device)
+netG2.apply(weights_init)
+
+print(netG2)
 
 netD = Discriminator(ngpu, nc, ndf).to(device)
 netD.apply(weights_init)
@@ -132,7 +138,10 @@ for epoch in range(num_epochs):
         # Generate batch of latent vectors
         noise = torch.randn(b_size, nz, 1, 1, device=device)
         # Generate fake image batch with G
-        fake = netG(noise)
+        fake1 = netG(noise).detach().cpu()
+        fake2 = netG2(noise).detach().cpu()
+
+        fake = np.concatenate((fake1,fake2), 2).to(device)
         label.fill_(fake_label)
         # Classify all fake batch with D
         output = netD(fake.detach()).view(-1)
