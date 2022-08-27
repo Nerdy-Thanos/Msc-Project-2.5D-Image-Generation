@@ -53,7 +53,8 @@ ndf = 16
 # Number of training epochs
 num_epochs = 10
 # Learning rate for optimizers
-lr = 0.002
+g_lr = 0.0001
+d_lr = 0.0004
 # Beta1 hyperparam for Adam optimizers
 beta1 = 0.5
 # Number of GPUs available. Use 0 for CPU mode.
@@ -90,7 +91,7 @@ criterion = nn.BCELoss()
 
 # Create batch of latent vectors that we will use to visualize
 #  the progression of the generator
-fixed_noise = torch.randn(64, nz, 1, 1, device=device)
+fixed_noise = torch.randn(128, nz, 1, 1, device=device)
 
 # Establish convention for real and fake labels during training
 real_label = 1.0
@@ -100,8 +101,8 @@ fake_label = 0.0
     #print(j[0].size())
 
 # Setup Adam optimizers for both G and D
-optimizerD = optim.Adam(netD.parameters(), lr=lr, betas=(beta1, 0.999))
-optimizerG = optim.Adam(netG.parameters(), lr=lr, betas=(beta1, 0.999))
+optimizerD = optim.Adam(netD.parameters(), lr=d_lr, betas=(beta1, 0.999))
+optimizerG = optim.Adam(netG.parameters(), lr=g_lr, betas=(beta1, 0.999))
 
 # Training Loop
 
