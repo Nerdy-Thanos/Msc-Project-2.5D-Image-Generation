@@ -6,7 +6,7 @@ from torchvision.utils import save_image
 
 device = torch.device("mps" if (torch.has_mps) else "cpu")
 
-cpkt = torch.load("DCGan/ckpt/trained_gen.pt")
+cpkt = torch.load("ENTER MODEL PATH HERE")
 cpkt.to(device)
 print(cpkt.eval())
 
