@@ -27,7 +27,15 @@ The stereo pairs of images generated are passed to the depth estimation model
 # 2.5D Parallax effect
 run the autozoom.py after specifying the zoom parameters.
 This generates a video file that shows the image with the depth parallax effect
-![driving](https://github.com/Nerdy-Thanos/Msc-Project-2.5D-Image-Generation/blob/main/samples/drivingsample1997.mp4?raw=True)
+<br>
+<br> DrivingStereo 2.5D parallax effect
+
+https://user-images.githubusercontent.com/47348592/187265795-03d5bd32-808d-4159-8026-2a500541f66a.mp4
+
+<br>
+<br>Landscape 2.5D parallax effect
+
+https://user-images.githubusercontent.com/47348592/187266040-899e3562-267a-4a67-921b-b1c518dccf7d.mp4
 
 # Acknowledgements
 Parts of the code were adopted from the folllwing sources
