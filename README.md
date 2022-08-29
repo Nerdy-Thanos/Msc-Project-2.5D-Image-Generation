@@ -22,7 +22,7 @@ The stereo pairs of images generated are passed to the depth estimation model
 run the autozoom.py after specifying the zoom parameters.
 This generates a video file that shows the image with the depth parallax effect
 
-#Acknowledgements
+# Acknowledgements
 Parts of the code was adopted from the folllwing sources
 - [DCGAN pytorch tutorial](https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html)
 - [Projected GANs converge faster](https://github.com/autonomousvision/projected_gan)
