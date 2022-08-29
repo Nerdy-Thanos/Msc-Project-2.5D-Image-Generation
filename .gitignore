@@ -7,7 +7,7 @@ gan
 .DS_Store
 holopix50k-master
 *.jpg
-*.pt
+.pt
 mono_depth_estim
 .jpg
 .png
