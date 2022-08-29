@@ -1,5 +1,5 @@
-from __future__ import print_function
-#%matplotlib inline
+#REFERRED FROM DCGAN TUTORIAL
+#SOURCE - https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html
 import argparse
 import os
 from pathlib import Path
@@ -23,6 +23,7 @@ import cv2
 
 from gennet import Generator
 from disnet import Discriminator
+
 
 # custom weights initialization called on GenNet and DisNet
 def weights_init(m):
@@ -54,7 +55,7 @@ ndf = 16
 num_epochs = 10
 # Learning rate for optimizers
 g_lr = 0.0001
-d_lr = 0.0004
+d_lr = 0.0002
 # Beta1 hyperparam for Adam optimizers
 beta1 = 0.5
 # Number of GPUs available. Use 0 for CPU mode.
@@ -85,6 +86,11 @@ print(netG2)
 
 netD = Discriminator(ngpu, nc, ndf).to(device)
 netD.apply(weights_init)
+
+#Import the InceptionV3 class to calculate FID
+block_idx = InceptionV3.BLOCK_INDEX_BY_DIM[2048]
+model = InceptionV3([block_idx])
+model=model.to(device)
 
 # Initialize BCELoss function
 criterion = nn.BCELoss()
