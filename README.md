@@ -19,10 +19,15 @@ A snapshot of the network is saved to be used for inference later.
 The stereo pairs of images generated are passed to the depth estimation model
 <br> run imageDepthEstimation.py and enter the path to the left and right images
 <br> 
+<br>Landscape dataset Left/right pair with depth map
 ![Landscape dataset Left/right pair with depth map](https://github.com/Nerdy-Thanos/Msc-Project-2.5D-Image-Generation/blob/main/samples/Screenshot%202022-08-29%20at%206.15.21%20PM.png)<br>
+<br>
+<br>DrivingStereo dataset Left/right pair with depth map
+![DrivingStereo depth map](https://github.com/Nerdy-Thanos/Msc-Project-2.5D-Image-Generation/blob/main/samples/Screenshot%202022-08-29%20at%206.17.10%20PM.png)
 # 2.5D Parallax effect
 run the autozoom.py after specifying the zoom parameters.
 This generates a video file that shows the image with the depth parallax effect
+![driving](https://github.com/Nerdy-Thanos/Msc-Project-2.5D-Image-Generation/blob/main/samples/drivingsample1997.mp4?raw=True)
 
 # Acknowledgements
 Parts of the code were adopted from the folllwing sources
