@@ -11,7 +11,7 @@ To train the model, run train.py in the DCGAN directory. The models will be save
 <br> This will load the saved checkpoint and generate a sample from random noise.
 ## Projected FastGAN
 FastGAN enerator is used with a Projected Discriminator
-<br>The training script is in the projected_gan.ipynb notebook. The model is trained for 100000 iterations for a total time of 3 hrs 46 mins.
+<br>The training script is in the model_training_projected_gan.ipynb notebook. The model is trained for 100000 iterations for a total time of 3 hrs 46 mins.
 A snapshot of the network is saved to be used for inference later.
 <br> run the gen_images.py script.specify the parameters
 <br> --seeds="random seed-int", --nework="Path to the Netowrk", --outdir="Path to the output directory"
