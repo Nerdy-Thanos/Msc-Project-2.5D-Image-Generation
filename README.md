@@ -15,6 +15,10 @@ FastGAN enerator is used with a Projected Discriminator
 A snapshot of the network is saved to be used for inference later.
 <br> run the gen_images.py script.specify the parameters
 <br> --seeds="random seed-int", --nework="Path to the Netowrk", --outdir="Path to the output directory"
+## FID Score
+To calculate FID score, 
+<br> pip3 install pytorch-fid
+<br> then run python3 pytorch_fid path/to/real path/to/generated
 ## Depth Estimation
 The stereo pairs of images generated are passed to the depth estimation model
 <br> run imageDepthEstimation.py and enter the path to the left and right images
@@ -43,4 +47,5 @@ Parts of the code were adopted from the folllwing sources
 - [Projected GANs converge faster](https://github.com/autonomousvision/projected_gan)
 - [Depth Estimation with stereo matching](https://github.com/ibaiGorordo/PyTorch-High-Res-Stereo-Depth-Estimation)
 - [3d Ken Burns Effect](https://github.com/sniklaus/3d-ken-burns)
+- [FID Score calculation PyTorch](https://github.com/mseitzer/pytorch-fid)
 
